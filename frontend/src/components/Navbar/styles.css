@@ -1,0 +1,12 @@
+.main-nav {
+  height: 68px;
+  padding-left: 18px;
+  display: flex;
+}
+.main-nav div {
+  display: flex;
+  align-items: center;
+}
+.nav-logo-text {
+  color: #000;
+}
