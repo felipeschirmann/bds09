@@ -10,3 +10,16 @@
 .nav-logo-text {
   color: #000;
 }
+
+.nav-container-navigation {
+  margin: 0;
+  padding: 0;
+}
+
+.nav-navigation-itens {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
