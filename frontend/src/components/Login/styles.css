@@ -1,0 +1,42 @@
+.container-login {
+  background-color: #6c6c6c;
+  margin: 15px 10px;
+  padding: 0 15px;
+  height: calc(100vh - 100px);
+  padding-top: 60px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+}
+
+.container-login form {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+h1 {
+  font-family: "Open Sans";
+  font-weight: 400;
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="password"] {
+  background-color: #fefefe;
+  margin-bottom: 20px;
+  max-width: 380px;
+}
+
+button {
+  margin-top: 55px;
+  height: 50px;
+  max-width: 380px;
+}
+@media (min-width: 576px) {
+  .container-login {
+    height: 575px;
+    width: 480px;
+  }
+}
