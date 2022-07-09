@@ -5,14 +5,12 @@ import { Route, Routes } from "react-router-dom";
 
 function AppRoutes() {
   return (
-    
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="movies" element={<MovieCatalog />}>
-          <Route path=":moviesId" element={<MovieDetails />} />
-        </Route>
-        <Route path="*" element={<Home />} />
-      </Routes>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/movies" element={<MovieCatalog />} />
+      <Route path="/movies/moviesId" element={<MovieDetails />} />
+      <Route path="*" element={<Home />} />
+    </Routes>
   );
 }
 
