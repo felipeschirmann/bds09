@@ -1,4 +1,5 @@
 import ButtonLogout from "components/ButtonLogout";
+import { Link } from "react-router-dom";
 import "./styles.css";
 
 const Navbar = () => {
@@ -9,9 +10,7 @@ const Navbar = () => {
           <div className="nav-navigation-itens">
             <div className="nav-container-navigation">
               <div className="nav-logo-text">
-                <a href="/">
-                  <h4>MovieFlix</h4>
-                </a>
+                <Link to="/"><h4>MovieFlix</h4></Link>
               </div>
               <div className="collapse navbar-collapse">
                 <ul className="navbar-nav offset-md-3 main-menu">
