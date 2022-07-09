@@ -1,0 +1,39 @@
+.container-home-card {
+  display: none;
+}
+
+.container-home {
+  padding: 0;
+  margin: 0;
+}
+
+@media (min-width: 576px) {
+  .container-home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .container-login{
+    margin-top: 40px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container-home {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .container-home-card {
+    margin-left: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .container-home-card h1 {
+    margin-bottom: 40px;
+  }
+  .container-home-card p {
+    margin-bottom: 50px;
+  }
+}

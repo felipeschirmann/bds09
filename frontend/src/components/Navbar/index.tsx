@@ -16,7 +16,7 @@ const Navbar = () => {
               <div className="collapse navbar-collapse">
                 <ul className="navbar-nav offset-md-3 main-menu">
                   <li>
-                    <a href="/" className="active"></a>
+                    {/* <a href="#" className="active"></a> */}
                   </li>
                 </ul>
               </div>
