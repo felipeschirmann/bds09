@@ -12,6 +12,7 @@ type FormData = {
 
 const Login = () => {
   const [hasError, setError] = useState(false);
+  let navigate = useNavigate();
 
   const {
     register,
@@ -23,7 +24,7 @@ const Login = () => {
     requestBackendLogin(formData)
       .then((reponse) => {
         saveAuthData(reponse.data);
-        navigate('/movies');
+        navigate("/movies", { replace: true });
         setError(false);
       })
       .catch((error) => {
@@ -31,8 +32,6 @@ const Login = () => {
         setError(true);
       });
   };
-
-  const navigate = useNavigate();
 
   return (
     <>
