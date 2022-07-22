@@ -35,18 +35,6 @@ const MovieDetails = () => {
               "Gostei muito do filme. Foi muito bom mesmo. Pena que durou pouco."
             }
           ></textarea>
-          <div className="comments-title">
-            <Star />
-            <p>Maria Silva</p>
-          </div>
-          <textarea
-            name="comments"
-            id=""
-            readOnly
-            value={
-              "Gostei muito do filme. Foi muito bom mesmo. Pena que durou pouco."
-            }
-          ></textarea>
         </div>
       </div>
     </>
