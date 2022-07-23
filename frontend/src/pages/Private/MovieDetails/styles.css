@@ -16,6 +16,7 @@ h2 {
 
 .container-evaluation input {
   margin: 0 0 10px 0;
+  max-width: unset;
 }
 
 .container-evaluation button {
@@ -53,7 +54,6 @@ textarea {
 @media (min-width: 576px) {
   .container-evaluation input {
     margin: 0 0 20px 0;
-    max-width: unset;
   }
 
   textarea {

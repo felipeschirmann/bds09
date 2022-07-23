@@ -2,7 +2,7 @@ import PrivateRoute from "components/PrivateRoute";
 import Home from "pages/Home";
 import MovieCatalog from "pages/Private/MovieCatalog";
 import MovieDetails from "pages/Private/MovieDetails";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 function AppRoutes() {
   return (
@@ -16,8 +16,15 @@ function AppRoutes() {
           </PrivateRoute>
         }
       />
-      <Route path="movies">
-        <Route path=":moviesId" element={<MovieDetails />} />
+      <Route path="/movies">
+        <Route
+          path=":moviesId"
+          element={
+            <PrivateRoute>
+              <MovieDetails />
+            </PrivateRoute>
+          }
+        />
       </Route>
     </Routes>
   );
