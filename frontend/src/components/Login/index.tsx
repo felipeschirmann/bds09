@@ -24,6 +24,7 @@ const Login = () => {
     requestBackendLogin(formData)
       .then((reponse) => {
         saveAuthData(reponse.data);
+        console.log("Login...");
         navigate("/movies", { replace: true });
         setError(false);
       })

@@ -1,23 +1,23 @@
-import axios, { AxiosRequestConfig } from 'axios';
-import qs from 'qs';
-import history from './history';
-import { getAuthData } from './storage';
-import jwtDecode from 'jwt-decode';
-
+import axios, { AxiosRequestConfig } from "axios";
+import qs from "qs";
+import history from "./history";
+import { getAuthData } from "./storage";
+import jwtDecode from "jwt-decode";
 
 type Role = "ROLE_VISITOR" | "ROLE_MEMBER";
 
-type TokenData = {
+export type TokenData = {
   exp: number;
   user_name: string;
   authorities: Role[];
-}
+};
 
 export const BASE_URL =
-  process.env.REACT_APP_BACKEND_URL ?? 'https://movieflix-devsuperior.herokuapp.com';
+  process.env.REACT_APP_BACKEND_URL ??
+  "https://movieflix-devsuperior.herokuapp.com";
 
-const CLIENT_ID = process.env.REACT_APP_CLIENT_ID ?? 'myclientid';
-const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET ?? 'myclientsecret';
+const CLIENT_ID = process.env.REACT_APP_CLIENT_ID ?? "myclientid";
+const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET ?? "myclientsecret";
 
 type LoginData = {
   username: string;
@@ -26,19 +26,19 @@ type LoginData = {
 
 export const requestBackendLogin = (loginData: LoginData) => {
   const headers = {
-    'Content-Type': 'application/x-www-form-urlencoded',
-    Authorization: 'Basic ' + window.btoa(CLIENT_ID + ':' + CLIENT_SECRET),
+    "Content-Type": "application/x-www-form-urlencoded",
+    Authorization: "Basic " + window.btoa(CLIENT_ID + ":" + CLIENT_SECRET),
   };
 
   const data = qs.stringify({
     ...loginData,
-    grant_type: 'password',
+    grant_type: "password",
   });
 
   return axios({
-    method: 'POST',
+    method: "POST",
     baseURL: BASE_URL,
-    url: '/oauth/token',
+    url: "/oauth/token",
     data,
     headers,
   });
@@ -48,7 +48,7 @@ export const requestBackend = (config: AxiosRequestConfig) => {
   const headers = config.withCredentials
     ? {
         ...config.headers,
-        Authorization: 'Bearer ' + getAuthData().access_token,
+        Authorization: "Bearer " + getAuthData().access_token,
       }
     : config.headers;
 
@@ -75,21 +75,40 @@ axios.interceptors.response.use(
   },
   function (error) {
     if (error.response.status === 401) {
-      history.push('/admin/auth');
+      history.push("/admin/auth");
     }
     return Promise.reject(error);
   }
 );
 
-export const getTokenData = () : TokenData | undefined =>  {
+export const getTokenData = (): TokenData | undefined => {
   try {
-    return jwtDecode(getAuthData().access_token) as TokenData ;
+    return jwtDecode(getAuthData().access_token) as TokenData;
   } catch (error) {
     return undefined;
   }
-}
+};
 
-export const isAuthenticated = () : boolean =>  {
+export const isAuthenticated = (): boolean => {
   const tokenData = getTokenData();
-  return (tokenData && tokenData.exp * 1000 > Date.now()) ? true : false ;
-}
+  return tokenData && tokenData.exp * 1000 > Date.now() ? true : false;
+};
+
+export const hasAnyRoles = (roles: Role[]): boolean => {
+  if (roles.length === 0) {
+    return true;
+  }
+
+  const tokenData = getTokenData();
+
+  if (tokenData !== undefined) {
+    for (var i = 0; i < roles.length; i++) {
+      if (tokenData.authorities.includes(roles[i])) {
+        return true;
+      }
+    }
+    //return roles.some(role => tokenData.authorities.includes(role));
+  }
+
+  return false;
+};

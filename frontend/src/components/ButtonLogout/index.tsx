@@ -1,11 +1,13 @@
 import { AuthContext } from "AuthContext";
 import { useContext } from "react";
-import history from "util/history";
+import { useNavigate } from "react-router-dom";
 import { removeAuthData } from "util/storage";
 import "./styles.css";
 
 const ButtonLogout = () => {
-  const { authContextData, setAuthContextData } = useContext(AuthContext);
+  let navigate = useNavigate();
+
+  const { setAuthContextData } = useContext(AuthContext);
 
   const handleLogoutClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
@@ -13,12 +15,12 @@ const ButtonLogout = () => {
     setAuthContextData({
       authenticated: false,
     });
-    history.replace("/");
+    navigate("/", { replace: true });
   };
 
   return (
     <>
-      <a className="btn btn-primary btn-logout" onClick={handleLogoutClick}>
+      <a className="btn btn-primary btn-logout" href="/" onClick={handleLogoutClick}>
         <h6>SAIR</h6>
       </a>
     </>
