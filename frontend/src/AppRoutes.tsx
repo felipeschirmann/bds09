@@ -18,7 +18,7 @@ function AppRoutes() {
       />
       <Route path="/movies">
         <Route
-          path=":moviesId"
+          path=":movieId"
           element={
             <PrivateRoute>
               <MovieDetails />
