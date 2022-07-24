@@ -1,4 +1,5 @@
 import Navbar from "components/Navbar";
+import { hasAnyRoles } from "util/requests";
 import { ReactComponent as Star } from "assets/images/star.svg";
 import "./styles.css";
 
@@ -8,20 +9,22 @@ const MovieDetails = () => {
       <Navbar />
       <div className="container-movie-details">
         <h2>Tela detalhes do filme id: 1</h2>
-        <div className="container-evaluation">
-          <form>
-            <input
-              type="text"
-              placeholder="Deixe sua avaliação aqui"
-              className="form-control"
-            />
-            <div className="text-center">
-              <button className="btn btn-primary form-control">
-                <h6>SALVAR AVALIAÇÃO</h6>
-              </button>
-            </div>
-          </form>
-        </div>
+        {hasAnyRoles(["ROLE_MEMBER"]) && (
+          <div className="container-evaluation">
+            <form>
+              <input
+                type="text"
+                placeholder="Deixe sua avaliação aqui"
+                className="form-control"
+              />
+              <div className="text-center">
+                <button className="btn btn-primary form-control">
+                  <h6>SALVAR AVALIAÇÃO</h6>
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
         <div className="container-comments">
           <div className="comments-title">
             <Star />
