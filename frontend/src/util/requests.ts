@@ -1,6 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
 import qs from "qs";
-import history from "./history";
 import { getAuthData } from "./storage";
 import jwtDecode from "jwt-decode";
 
@@ -54,32 +53,6 @@ export const requestBackend = (config: AxiosRequestConfig) => {
 
   return axios({ ...config, baseURL: BASE_URL, headers });
 };
-
-// Add a request interceptor
-axios.interceptors.request.use(
-  function (config) {
-    //
-    return config;
-  },
-  function (error) {
-    //
-    return Promise.reject(error);
-  }
-);
-
-// Add a response interceptor
-axios.interceptors.response.use(
-  function (response) {
-    //
-    return response;
-  },
-  function (error) {
-    if (error.response.status === 401) {
-      history.push("/admin/auth");
-    }
-    return Promise.reject(error);
-  }
-);
 
 export const getTokenData = (): TokenData | undefined => {
   try {
