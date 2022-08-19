@@ -1,9 +1,11 @@
 import { AxiosRequestConfig } from "axios";
 import { useForm } from "react-hook-form";
+import { review } from "types/review";
 import { requestBackend } from "util/requests";
 
 type Props = {
   movieId: string;
+  onInsertReview: (review: review) => void;
 };
 
 type FormData = {
@@ -11,10 +13,11 @@ type FormData = {
   text: string;
 };
 
-const ReviewForm = ({ movieId }: Props) => {
+const ReviewForm = ({ movieId, onInsertReview }: Props) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<FormData>();
 
@@ -30,6 +33,8 @@ const ReviewForm = ({ movieId }: Props) => {
 
     requestBackend(config)
       .then((response) => {
+        setValue('text','');
+        onInsertReview(response.data);
         console.log("Salvo", response);
       })
       .catch((error) => {
