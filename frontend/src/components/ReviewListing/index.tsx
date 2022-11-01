@@ -1,8 +1,8 @@
 import { ReactComponent as Star } from "assets/images/star.svg";
-import { review } from "types/review";
+import { Review } from "types/review";
 
 type Props = {
-  reviews: review[];
+  reviews: Review[];
 };
 
 const ReviewListing = ({ reviews }: Props) => {

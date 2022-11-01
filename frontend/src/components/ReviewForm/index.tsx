@@ -1,12 +1,12 @@
 import { AxiosRequestConfig } from "axios";
 import { useForm } from "react-hook-form";
-import { review } from "types/review";
+import { Review } from "types/review";
 import { requestBackend } from "util/requests";
 import "./styles.css";
 
 type Props = {
   movieId: string;
-  onInsertReview: (review: review) => void;
+  onInsertReview: (review: Review) => void;
 };
 
 type FormData = {

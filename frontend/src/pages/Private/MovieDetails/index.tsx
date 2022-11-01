@@ -1,7 +1,7 @@
 import Navbar from "components/Navbar";
 import ReviewListing from "components/ReviewListing";
 import ReviewForm from "components/ReviewForm";
-import { review } from "types/review";
+import { Review } from "types/review";
 import { BASE_URL, hasAnyRoles, requestBackend } from "util/requests";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -15,7 +15,7 @@ type UrlParams = {
 const MovieDetails = () => {
   const { movieId } = useParams<UrlParams>();
 
-  const [reviews, setReviews] = useState<review[]>([]);
+  const [reviews, setReviews] = useState<Review[]>([]);
 
   useEffect(() => {
     const config: AxiosRequestConfig = {
@@ -28,7 +28,7 @@ const MovieDetails = () => {
     });
   }, [movieId]);
 
-  const handleInsertReview = (review: review) => {
+  const handleInsertReview = (review: Review) => {
     const clone = [...reviews];
     clone.push(review);
     setReviews(clone);
