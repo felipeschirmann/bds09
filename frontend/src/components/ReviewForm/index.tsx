@@ -2,6 +2,7 @@ import { AxiosRequestConfig } from "axios";
 import { useForm } from "react-hook-form";
 import { review } from "types/review";
 import { requestBackend } from "util/requests";
+import "./styles.css";
 
 type Props = {
   movieId: string;
@@ -56,7 +57,7 @@ const ReviewForm = ({ movieId, onInsertReview }: Props) => {
         {errors.text?.message}
         <div className="text-center">
           <button className="btn btn-primary form-control">
-            <h6>SALVAR AVALIAÇÃO</h6>
+            <h5>SALVAR AVALIAÇÃO</h5>
           </button>
         </div>
       </form>

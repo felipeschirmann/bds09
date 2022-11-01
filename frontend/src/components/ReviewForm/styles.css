@@ -1,0 +1,13 @@
+h5 {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: -0.015em;
+  color: #000000;
+}
+
+input {
+  height: 50px;
+}

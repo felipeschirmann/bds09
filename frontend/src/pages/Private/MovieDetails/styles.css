@@ -7,6 +7,45 @@ h2 {
   margin-bottom: 20px;
 }
 
+.subtitle-details {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: -0.015em;
+  margin-left: 15px;
+}
+
+.description {
+  border: 1px solid #e1e1e1;
+  border-radius: 10px;
+  margin: 15px;
+  padding: 10px;
+
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: justify;
+  letter-spacing: -0.015em;
+  color: #9e9e9e;
+}
+
+.card-movie-details {
+  background: #6c6c6c;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  padding: 20px 0;
+  margin-bottom: 25px;
+}
+
+.card-movie-details img {
+  padding: 0 15px;
+  width: 100%;
+}
+
 .container-evaluation {
   padding: 20px 10px;
   background: #6c6c6c;

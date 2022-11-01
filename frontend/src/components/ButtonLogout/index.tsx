@@ -21,7 +21,7 @@ const ButtonLogout = () => {
   return (
     <>
       <a className="btn btn-primary btn-logout" href="/" onClick={handleLogoutClick}>
-        <h6>SAIR</h6>
+        <div className="logout">SAIR</div>
       </a>
     </>
   );

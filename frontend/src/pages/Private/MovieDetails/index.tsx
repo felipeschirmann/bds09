@@ -38,7 +38,22 @@ const MovieDetails = () => {
     <>
       <Navbar />
       <div className="container-movie-details">
-        <h2>Tela detalhes do filme id: {movieId}</h2>
+        <div className="card-movie-details">
+          <img
+            src="https://image.tmdb.org/t/p/w533_and_h300_bestv2/wu1uilmhM4TdluKi2ytfz8gidHf.jpg"
+            alt=""
+          />
+          <h6>Bob Esponja</h6>
+          <p className="card-movie-year">2020</p>
+          <div className="subtitle-details">O Incrível Resgate</div>
+          <div className="description">
+            Onde está Gary? Segundo Bob Esponja, Gary foi "caracolstrado"
+            pelo temível Rei Poseidon e levado para a cidade perdida de Atlantic
+            City. Junto a Patrick Estrela, ele sai em uma missão de resgate ao
+            querido amigo, e nesta jornada os dois vão conhecer novos
+            personagens e viver inimagináveis aventuras.
+          </div>
+        </div>
         {hasAnyRoles(["ROLE_MEMBER"]) && movieId ? (
           <ReviewForm movieId={movieId} onInsertReview={handleInsertReview} />
         ) : (
