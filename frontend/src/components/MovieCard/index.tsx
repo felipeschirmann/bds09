@@ -1,28 +1,38 @@
+import { AxiosRequestConfig } from "axios";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Movie } from "types/movie";
+import { BASE_URL, requestBackend } from "util/requests";
+
 import "./styles.css";
 
 type Props = {
-  movieid: number;
+  movieId: number;
 };
 
-const MovieCard = ({ movieid }: Props) => {
-  const movie = {
-    id: 1,
-    title: "Bob Esponja",
-    subTitle: "O Incrível Resgate",
-    year: 2020,
-    imgUrl:
-      "https://image.tmdb.org/t/p/w533_and_h300_bestv2/wu1uilmhM4TdluKi2ytfz8gidHf.jpg",
-    synopsis:
-      'Onde está Gary? Segundo Bob Esponja, Gary foi "caracolstrado" pelo temível Rei Poseidon e levado para a cidade perdida de Atlantic City. Junto a Patrick Estrela, ele sai em uma missão de resgate ao querido amigo, e nesta jornada os dois vão conhecer novos personagens e viver inimagináveis aventuras.',
-  };
+const MovieCard = ({ movieId }: Props) => {
+  const [movie, setMovie] = useState<Movie>();
+
+  useEffect(() => {
+    const config: AxiosRequestConfig = {
+      url: `${BASE_URL}/movies/${movieId}`,
+      withCredentials: true,
+    };
+    requestBackend(config).then((response) => {
+      setMovie(response.data);
+      console.log(response.data);
+    });
+  }, [movieId]);
 
   return (
     <>
-      <div className="card-movie">
-        <img src={movie.imgUrl} alt={movie.title} />
-        <h6>{movie.title}</h6>
-        <p className="card-movie-year">{movie.year}</p>
-        <div className="subtitle">{movie.subTitle}</div>
+      <div key={movie?.id} className="card-movie">
+        <Link to={`/movies/${movieId}`}>
+          <img src={movie?.imgUrl} alt={movie?.title} />
+        </Link>
+        <h6>{movie?.title}</h6>
+        <p className="card-movie-year">{movie?.year}</p>
+        <div className="subtitle">{movie?.subTitle}</div>
       </div>
     </>
   );

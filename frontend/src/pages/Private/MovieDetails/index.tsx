@@ -7,6 +7,7 @@ import { BASE_URL, hasAnyRoles, requestBackend } from "util/requests";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { AxiosRequestConfig } from "axios";
+
 import "./styles.css";
 
 type UrlParams = {
@@ -19,7 +20,7 @@ const MovieDetails = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
   
   const [movie, setMovie] = useState<Movie>();
-  
+
   useEffect(() => {
     const config: AxiosRequestConfig = {
       url: `${BASE_URL}/movies/${movieId}/reviews`,

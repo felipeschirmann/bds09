@@ -1,26 +1,40 @@
+import { AxiosRequestConfig } from "axios";
 import MovieCard from "components/MovieCard";
 import Navbar from "components/Navbar";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Movie } from "types/movie";
+import { SpringPage } from "types/vendor/spring";
+import { requestBackend } from "util/requests";
 
 import "./styles.css";
 
 const MovieCatalog = () => {
+  const [page, setPage] = useState<SpringPage<Movie>>();
+
+  useEffect(() => {
+    const config: AxiosRequestConfig = {
+      method: "GET",
+      url: `/movies`,
+      params: {
+        size: 4,
+        page: 0,
+      },
+      withCredentials: true,
+    };
+    requestBackend(config).then((response) => {
+      setPage(response.data);
+    });
+  }, []);
 
   return (
     <>
       <Navbar />
       <p>Filtro</p>
       <div className="cards">
-        <MovieCard movieid={1} />
+        {page?.content.map((movie) => (
+          <MovieCard key={movie.id} movieId={movie.id} />
+        ))}
       </div>
-      <ul>
-        <li>
-          <Link to="/movies/1">Acessar /movies/1</Link>
-        </li>
-        <li>
-          <Link to="/movies/2">Acessar /movies/2</Link>
-        </li>
-      </ul>
     </>
   );
 };
