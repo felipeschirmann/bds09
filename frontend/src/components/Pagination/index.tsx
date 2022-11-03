@@ -4,7 +4,7 @@ import ReactPaginate from "react-paginate";
 
 const Pagination = () => {
   return (
-    <>
+    <div className="pagination-container">
       <ReactPaginate
         pageCount={5}
         pageRangeDisplayed={2}
@@ -18,15 +18,7 @@ const Pagination = () => {
         activeLinkClassName="pagination-active"
         disabledClassName="arrow-inactive"
       />
-      <div className="pagination-container">
-        <ArrowIcon className="arrow-inactive" />
-        <div className="pagination-item active">1</div>
-        <div className="pagination-item">2</div>
-        <div className="pagination-item">...</div>
-        <div className="pagination-item">5</div>
-        <ArrowIcon className="arrow-active arrow-next" />
-      </div>
-    </>
+    </div>
   );
 };
 
