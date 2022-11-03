@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { AxiosRequestConfig } from "axios";
 
 import "./styles.css";
+import MovieCard from "components/MovieCard";
 
 type UrlParams = {
   movieId: string;
@@ -18,7 +19,7 @@ const MovieDetails = () => {
   const { movieId } = useParams<UrlParams>();
 
   const [reviews, setReviews] = useState<Review[]>([]);
-  
+
   const [movie, setMovie] = useState<Movie>();
 
   useEffect(() => {
@@ -38,7 +39,6 @@ const MovieDetails = () => {
     setReviews(clone);
   };
 
-
   useEffect(() => {
     const config: AxiosRequestConfig = {
       url: `${BASE_URL}/movies/${movieId}`,
@@ -55,10 +55,7 @@ const MovieDetails = () => {
       <Navbar />
       <div className="container-movie-details">
         <div className="card-movie-details">
-          <img src={movie?.imgUrl} alt={movie?.title} />
-          <h6>{movie?.title}</h6>
-          <p className="card-movie-year">{movie?.year}</p>
-          <div className="subtitle">{movie?.subTitle}</div>
+          {movie ? <MovieCard movie={movie} /> : ""}
         </div>
         {hasAnyRoles(["ROLE_MEMBER"]) && movieId ? (
           <ReviewForm movieId={movieId} onInsertReview={handleInsertReview} />

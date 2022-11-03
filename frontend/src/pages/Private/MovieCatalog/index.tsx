@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from "axios";
-import MovieCard from "components/MovieCard";
+import MovieCardListing from "components/MovieCardListing";
 import Navbar from "components/Navbar";
 import { useEffect, useState } from "react";
 import { Movie } from "types/movie";
@@ -32,7 +32,7 @@ const MovieCatalog = () => {
       <p>Filtro</p>
       <div className="cards">
         {page?.content.map((movie) => (
-          <MovieCard key={movie.id} movieId={movie.id} />
+          <MovieCardListing key={movie.id} movieId={movie.id} />
         ))}
       </div>
     </>
