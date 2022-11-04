@@ -13,19 +13,23 @@ const MovieCatalog = () => {
   const [page, setPage] = useState<SpringPage<Movie>>();
 
   useEffect(() => {
+    getMovies(0);
+  }, []);
+
+  const getMovies = (pageNumber: number) => {
     const config: AxiosRequestConfig = {
       method: "GET",
       url: `/movies`,
       params: {
-        size: 4,
-        page: 0,
+        page: pageNumber,
+        size: 3,
       },
       withCredentials: true,
     };
     requestBackend(config).then((response) => {
       setPage(response.data);
     });
-  }, []);
+  };
 
   return (
     <>
@@ -36,7 +40,11 @@ const MovieCatalog = () => {
           <MovieCardListing key={movie.id} movieId={movie.id} />
         ))}
       </div>
-      <Pagination />
+      <Pagination
+        onChange={getMovies}
+        pageCount={page ? page?.totalPages : 0}
+        range={3}
+      />
     </>
   );
 };
