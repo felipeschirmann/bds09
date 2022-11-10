@@ -6,22 +6,32 @@ import { useEffect, useState } from "react";
 import { Movie } from "types/movie";
 import { SpringPage } from "types/vendor/spring";
 import { requestBackend } from "util/requests";
+import Filter from "components/Filter";
 
 import "./styles.css";
+
+type ControlComponentsData = {
+  activePage: number;
+};
 
 const MovieCatalog = () => {
   const [page, setPage] = useState<SpringPage<Movie>>();
 
-  useEffect(() => {
-    getMovies(0);
-  }, []);
+  const [controlComponentsData, setControlComponentsData] =
+    useState<ControlComponentsData>({
+      activePage: 0,
+    });
 
-  const getMovies = (pageNumber: number) => {
+  const handlePageChange = (pageNumber: number) => {
+    setControlComponentsData({ activePage: pageNumber });
+  };
+
+  useEffect(() => {
     const config: AxiosRequestConfig = {
       method: "GET",
       url: `/movies`,
       params: {
-        page: pageNumber,
+        page: controlComponentsData.activePage,
         size: 3,
       },
       withCredentials: true,
@@ -29,19 +39,19 @@ const MovieCatalog = () => {
     requestBackend(config).then((response) => {
       setPage(response.data);
     });
-  };
+  }, [controlComponentsData]);
 
   return (
     <>
       <Navbar />
-      <p>Filtro</p>
+      <Filter />
       <div className="cards">
         {page?.content.map((movie) => (
           <MovieCardListing key={movie.id} movieId={movie.id} />
         ))}
       </div>
       <Pagination
-        onChange={getMovies}
+        onChange={handlePageChange}
         pageCount={page ? page?.totalPages : 0}
         range={3}
       />
