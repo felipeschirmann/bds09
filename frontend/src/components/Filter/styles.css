@@ -10,9 +10,10 @@
 .movie-filter {
   color: #fff;
   padding: 10px;
-  height: 50px;
-  width: 260px;
   border: 1px solid #e1e1e1;
   border-radius: 4px;
   background: #6c6c6c;
+}
+.movie-filter-container-form{
+  height: 60px;
 }
