@@ -7,7 +7,11 @@ import { BASE_URL, requestBackend } from "util/requests";
 
 import "./styles.css";
 
-const Filter = () => {
+type Props = {
+  onSubmitFilter :  (data: Genre) => void;
+}
+
+const Filter = ({onSubmitFilter}: Props) => {
   const [selectGenres, setSelectGenres] = useState<Genre[]>([]);
 
   useEffect(() => {
@@ -21,14 +25,21 @@ const Filter = () => {
     });
   }, []);
 
-  const { register, handleSubmit, control, getValues } = useForm<Genre>();
+  const { register, handleSubmit, control, getValues, setValue } =
+    useForm<Genre>();
 
   const onSubmit = (formData: Genre) => {
     console.log(formData);
+    onSubmitFilter(formData);
   };
 
   const handleSelectChange = (value: Genre) => {
+    if (value){
+      setValue("id", value.id);
+      setValue("name", value.name);
+    }
     console.log(value);
+    onSubmitFilter(value);
   };
 
   return (

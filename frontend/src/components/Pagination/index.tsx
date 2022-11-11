@@ -5,13 +5,15 @@ import ReactPaginate from "react-paginate";
 type Props = {
   pageCount: number;
   range: number;
+  forcePage?: number;
   onChange?: (pageNumber: number) => void;
 };
 
-const Pagination = ({ pageCount, range, onChange }: Props) => {
+const Pagination = ({ pageCount, range, forcePage, onChange }: Props) => {
   return (
     <div className="pagination-container">
       <ReactPaginate
+        forcePage={forcePage}
         pageCount={pageCount}
         pageRangeDisplayed={range}
         marginPagesDisplayed={1}

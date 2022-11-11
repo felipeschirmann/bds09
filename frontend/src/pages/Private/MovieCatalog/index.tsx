@@ -9,9 +9,11 @@ import { requestBackend } from "util/requests";
 import Filter from "components/Filter";
 
 import "./styles.css";
+import { Genre } from "types/genre";
 
 type ControlComponentsData = {
   activePage: number;
+  filterGenre: Genre | null;
 };
 
 const MovieCatalog = () => {
@@ -20,10 +22,21 @@ const MovieCatalog = () => {
   const [controlComponentsData, setControlComponentsData] =
     useState<ControlComponentsData>({
       activePage: 0,
+      filterGenre: null,
     });
 
+  const handleSubmitFilter = (data: Genre) => {
+    setControlComponentsData({
+      activePage: 0,
+      filterGenre: data,
+    });
+  };
+
   const handlePageChange = (pageNumber: number) => {
-    setControlComponentsData({ activePage: pageNumber });
+    setControlComponentsData({
+      activePage: pageNumber,
+      filterGenre: controlComponentsData.filterGenre,
+    });
   };
 
   useEffect(() => {
@@ -33,6 +46,7 @@ const MovieCatalog = () => {
       params: {
         page: controlComponentsData.activePage,
         size: 3,
+        genreId: controlComponentsData.filterGenre?.id,
       },
       withCredentials: true,
     };
@@ -44,13 +58,14 @@ const MovieCatalog = () => {
   return (
     <>
       <Navbar />
-      <Filter />
+      <Filter onSubmitFilter={handleSubmitFilter} />
       <div className="cards">
         {page?.content.map((movie) => (
           <MovieCardListing key={movie.id} movieId={movie.id} />
         ))}
       </div>
       <Pagination
+        forcePage={page?.number}
         onChange={handlePageChange}
         pageCount={page ? page?.totalPages : 0}
         range={3}
