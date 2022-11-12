@@ -7,9 +7,10 @@ import { BASE_URL, hasAnyRoles, requestBackend } from "util/requests";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { AxiosRequestConfig } from "axios";
+import MovieCard from "components/MovieCard";
+import { toast } from "react-toastify";
 
 import "./styles.css";
-import MovieCard from "components/MovieCard";
 
 type UrlParams = {
   movieId: string;
@@ -29,6 +30,7 @@ const MovieDetails = () => {
     };
     requestBackend(config).then((response) => {
       setReviews(response.data);
+      toast.success("Salvo!!!");
       console.log(response.data);
     });
   }, [movieId]);

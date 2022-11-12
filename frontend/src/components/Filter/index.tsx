@@ -44,8 +44,8 @@ const Filter = ({onSubmitFilter}: Props) => {
 
   return (
     <div className="movie-filter-container">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
+      <form onSubmit={handleSubmit(onSubmit)} className="movie-filter-form">
+        <div className="movie-filter-genre-select-container">
           <Controller
             name="name"
             control={control}
@@ -53,7 +53,8 @@ const Filter = ({onSubmitFilter}: Props) => {
               <Select
                 options={selectGenres}
                 isClearable
-                classNamePrefix="movie-filter"
+                placeholder="Gênero"
+                classNamePrefix="movie-filter-genre"
                 getOptionLabel={(genre: Genre) => genre.name}
                 getOptionValue={(genre: Genre) => String(genre.id)}
                 onChange={(value) => handleSelectChange(value as Genre)}

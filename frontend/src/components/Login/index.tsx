@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { requestBackendLogin } from "util/requests";
 import { saveAuthData } from "util/storage";
 import "./styles.css";
@@ -26,9 +27,11 @@ const Login = () => {
         saveAuthData(reponse.data);
         console.log("Login...");
         navigate("/movies", { replace: true });
+        toast.success("Bem Vindo!!");
         setError(false);
       })
       .catch((error) => {
+        toast.error("Erro!!");
         console.log(error);
         setError(true);
       });
