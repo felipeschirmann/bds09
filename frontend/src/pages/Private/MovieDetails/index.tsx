@@ -30,7 +30,6 @@ const MovieDetails = () => {
     };
     requestBackend(config).then((response) => {
       setReviews(response.data);
-      toast.success("Salvo!!!");
       console.log(response.data);
     });
   }, [movieId]);
@@ -39,6 +38,7 @@ const MovieDetails = () => {
     const clone = [...reviews];
     clone.push(review);
     setReviews(clone);
+    toast.success("Salvo!!!");
   };
 
   useEffect(() => {
