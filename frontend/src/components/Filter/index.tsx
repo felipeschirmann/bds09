@@ -8,10 +8,10 @@ import { BASE_URL, requestBackend } from "util/requests";
 import "./styles.css";
 
 type Props = {
-  onSubmitFilter :  (data: Genre) => void;
-}
+  onSubmitFilter: (data: Genre) => void;
+};
 
-const Filter = ({onSubmitFilter}: Props) => {
+const Filter = ({ onSubmitFilter }: Props) => {
   const [selectGenres, setSelectGenres] = useState<Genre[]>([]);
 
   useEffect(() => {
@@ -25,8 +25,7 @@ const Filter = ({onSubmitFilter}: Props) => {
     });
   }, []);
 
-  const { register, handleSubmit, control, getValues, setValue } =
-    useForm<Genre>();
+  const { handleSubmit, control, setValue } = useForm<Genre>();
 
   const onSubmit = (formData: Genre) => {
     console.log(formData);
@@ -34,7 +33,7 @@ const Filter = ({onSubmitFilter}: Props) => {
   };
 
   const handleSelectChange = (value: Genre) => {
-    if (value){
+    if (value) {
       setValue("id", value.id);
       setValue("name", value.name);
     }

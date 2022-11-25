@@ -45,7 +45,7 @@ const MovieCatalog = () => {
       url: `/movies`,
       params: {
         page: controlComponentsData.activePage,
-        size: 3,
+        size: 4,
         genreId: controlComponentsData.filterGenre?.id,
       },
       withCredentials: true,
@@ -58,18 +58,20 @@ const MovieCatalog = () => {
   return (
     <>
       <Navbar />
-      <Filter onSubmitFilter={handleSubmitFilter} />
-      <div className="cards">
-        {page?.content.map((movie) => (
-          <MovieCardListing key={movie.id} movieId={movie.id} />
-        ))}
+      <div className="container">
+        <Filter onSubmitFilter={handleSubmitFilter} />
+        <div className="cards">
+          {page?.content.map((movie) => (
+            <MovieCardListing key={movie.id} movieId={movie.id} />
+          ))}
+        </div>
+        <Pagination
+          forcePage={page?.number}
+          onChange={handlePageChange}
+          pageCount={page ? page?.totalPages : 0}
+          range={3}
+        />
       </div>
-      <Pagination
-        forcePage={page?.number}
-        onChange={handlePageChange}
-        pageCount={page ? page?.totalPages : 0}
-        range={3}
-      />
     </>
   );
 };
