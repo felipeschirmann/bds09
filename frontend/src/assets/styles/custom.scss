@@ -1,9 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --primary: #FF8400;
+  --primary-hover: #ff9824;
+  --primary-glow: rgba(255, 132, 0, 0.25);
+  --bg-deep: #060813;
+  --bg-gradient: radial-gradient(circle at 50% -20%, #1c223c 0%, #06080e 75%);
+  --glass-bg: rgba(25, 28, 50, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.6);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 $theme-colors: (
-  'primary': #FFC700,
+  'primary': #FF8400,
   'danger' : #FF5555
 );
 
-$body-bg: #525252;
-$body-color: #FFF;
+$body-bg: #06080e;
+$body-color: #f8fafc;
 
 @import '~bootstrap/scss/bootstrap.scss';
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep) !important;
+  background-image: var(--bg-gradient) !important;
+  background-attachment: fixed !important;
+  color: var(--text-main) !important;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Glowing background blobs - increased size and opacity for better contrast */
+body::before, body::after {
+  content: "";
+  position: fixed;
+  width: 65vw;
+  height: 65vw;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -2;
+  opacity: 0.26;
+  filter: blur(150px);
+}
+body::before {
+  top: -15vw;
+  left: -15vw;
+  background: radial-gradient(circle, var(--primary) 0%, transparent 80%);
+}
+body::after {
+  bottom: -15vw;
+  right: -15vw;
+  background: radial-gradient(circle, #6366f1 0%, transparent 80%);
+}
+
+/* Glass Card Component */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 1.75rem;
+  box-shadow: var(--glass-shadow);
+  transition: var(--transition-smooth);
+}
+.glass-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.55), 0 0 15px 0 rgba(255, 132, 0, 0.05);
+}
+
+/* Base button glass enhancements */
+.btn-primary {
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: #fff !important;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 14px 0 var(--primary-glow);
+  
+  &:hover {
+    background-color: var(--primary-hover) !important;
+    border-color: var(--primary-hover) !important;
+    box-shadow: 0 6px 20px 0 var(--primary-glow);
+    transform: translateY(-1px);
+  }
+}
