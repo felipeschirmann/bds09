@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from "axios";
-import MovieCardListing from "components/MovieCardListing";
+import MovieCard from "components/MovieCard";
 import Navbar from "components/Navbar";
 import Pagination from "components/Pagination";
 import { useEffect, useState } from "react";
@@ -62,7 +62,9 @@ const MovieCatalog = () => {
         <Filter onSubmitFilter={handleSubmitFilter} />
         <div className="cards">
           {page?.content.map((movie) => (
-            <MovieCardListing key={movie.id} movieId={movie.id} />
+            <div key={movie.id} className="card-movie">
+              <MovieCard movie={movie} />
+            </div>
           ))}
         </div>
         <Pagination
