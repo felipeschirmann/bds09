@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { requestBackendLogin } from "util/requests";
+import { getTokenData, requestBackendLogin } from "util/requests";
 import { saveAuthData } from "util/storage";
 import "./styles.css";
+import { AuthContext } from "AuthContext";
 
 type FormData = {
   username: string;
@@ -14,6 +15,7 @@ type FormData = {
 const Login = () => {
   const [hasError, setError] = useState(false);
   let navigate = useNavigate();
+  const { setAuthContextData } = useContext(AuthContext);
 
   const {
     register,
@@ -25,6 +27,10 @@ const Login = () => {
     requestBackendLogin(formData)
       .then((reponse) => {
         saveAuthData(reponse.data);
+        setAuthContextData({
+          authenticated: true,
+          tokenData: getTokenData(),
+        });
         console.log("Login...");
         navigate("/movies", { replace: true });
         toast.success("Bem Vindo!!");

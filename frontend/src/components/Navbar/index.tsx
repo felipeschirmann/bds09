@@ -1,25 +1,11 @@
 import { AuthContext } from "AuthContext";
 import ButtonLogout from "components/ButtonLogout";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { getTokenData, isAuthenticated } from "util/requests";
 import "./styles.css";
 
 const Navbar = () => {
-  const { authContextData, setAuthContextData } = useContext(AuthContext);
-
-  useEffect(() => {
-    if (isAuthenticated()) {
-      setAuthContextData({
-        authenticated: true,
-        tokenData: getTokenData(),
-      });
-    } else {
-      setAuthContextData({
-        authenticated: false,
-      });
-    }
-  }, [setAuthContextData]);
+  const { authContextData } = useContext(AuthContext);
 
   return (
     <>
@@ -28,7 +14,7 @@ const Navbar = () => {
           <div className="nav-navigation-itens">
             <div className="nav-container-navigation">
               <div className="nav-logo-text">
-                <Link to="/">
+                <Link to={authContextData.authenticated ? "/movies" : "/"}>
                   <h4>MovieFlix</h4>
                 </Link>
               </div>

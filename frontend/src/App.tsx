@@ -6,10 +6,13 @@ import { ToastContainer } from "react-toastify";
 import AppRoutes from "AppRoutes";
 import { useState } from "react";
 import { AuthContext, AuthContextData } from "AuthContext";
+import { getTokenData, isAuthenticated } from "util/requests";
 
 function App() {
-  const [authContextData, setAuthContextData] = useState<AuthContextData>({
-    authenticated: false,
+  const [authContextData, setAuthContextData] = useState<AuthContextData>(() => {
+    return isAuthenticated()
+      ? { authenticated: true, tokenData: getTokenData() }
+      : { authenticated: false };
   });
 
   return (
