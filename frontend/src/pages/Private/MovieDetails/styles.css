@@ -28,6 +28,31 @@
   border: 1px solid var(--glass-border);
 }
 
+.card-movie-details h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  margin: 20px 0 8px 0;
+  color: #fff;
+}
+
+.card-movie-details .card-movie-year {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--primary);
+  margin: 0 0 12px 0;
+}
+
+.card-movie-details .subtitle {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 24px;
+  margin: 0;
+}
+
 .container-evaluation {
   padding: 24px;
   background: var(--glass-bg);
@@ -63,6 +88,18 @@
   margin: 10px 0 0 0;
   height: 48px;
   border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-evaluation button h5 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.015em;
+  color: #000000 !important;
 }
 
 .container-comments {
@@ -120,5 +157,121 @@
   
   .container-evaluation button {
     margin-top: 5px;
+  }
+}
+
+@media (max-width: 575px) {
+  .container-movie-details {
+    padding: 12px;
+  }
+  
+  .card-movie-details {
+    padding: 16px;
+    margin-bottom: 16px;
+    border-radius: 12px;
+  }
+  
+  .card-movie-details img {
+    max-height: 250px;
+  }
+  
+  .card-movie-details h6 {
+    font-size: 20px;
+    line-height: 28px;
+    margin: 16px 0 6px 0;
+  }
+  
+  .card-movie-details .card-movie-year {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  
+  .card-movie-details .subtitle {
+    font-size: 14px;
+    line-height: 22px;
+  }
+  
+  .container-evaluation {
+    padding: 16px;
+    margin-bottom: 16px;
+    border-radius: 12px;
+  }
+  
+  .container-evaluation input {
+    height: 42px !important;
+    margin-bottom: 8px !important;
+    font-size: 14px;
+  }
+  
+  .container-evaluation button {
+    height: 42px !important;
+    margin-top: 6px !important;
+  }
+  
+  .container-evaluation button h5 {
+    font-size: 14px !important;
+  }
+  
+  .container-comments {
+    padding: 16px;
+    margin-top: 16px;
+    border-radius: 12px;
+  }
+  
+  .comment-text-container {
+    padding: 10px 12px;
+  }
+  
+  .comment-text {
+    font-size: 13px;
+    line-height: 20px;
+  }
+}
+
+@media (max-width: 320px) {
+  .container-movie-details {
+    padding: 10px;
+  }
+  
+  .card-movie-details {
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .card-movie-details img {
+    max-height: 200px;
+  }
+  
+  .card-movie-details h6 {
+    font-size: 18px;
+    line-height: 24px;
+    margin: 12px 0 4px 0;
+  }
+  
+  .container-evaluation {
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .container-evaluation input {
+    height: 38px !important;
+    font-size: 13px;
+  }
+  
+  .container-evaluation button {
+    height: 38px !important;
+  }
+  
+  .container-evaluation button h5 {
+    font-size: 13px !important;
+  }
+  
+  .container-comments {
+    padding: 12px;
+    margin-top: 12px;
+  }
+  
+  .comment-text-container {
+    padding: 8px 10px;
   }
 }

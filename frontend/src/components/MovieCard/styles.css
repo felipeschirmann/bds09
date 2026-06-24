@@ -67,8 +67,7 @@
 
 @media (min-width: 576px) {
   .card-movie {
-    max-width: 250px;
-    margin: 15px 10px;
+    margin: 0;
   }
   .card-movie img {
     height: 220px;
