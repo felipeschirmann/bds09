@@ -18,12 +18,28 @@ type ControlComponentsData = {
 
 const MovieCatalog = () => {
   const [page, setPage] = useState<SpringPage<Movie>>();
+  const [pageSize, setPageSize] = useState(() => window.innerWidth >= 992 ? 8 : 4);
 
   const [controlComponentsData, setControlComponentsData] =
     useState<ControlComponentsData>({
       activePage: 0,
       filterGenre: null,
     });
+
+  useEffect(() => {
+    const handleResize = () => {
+      const newSize = window.innerWidth >= 992 ? 8 : 4;
+      if (newSize !== pageSize) {
+        setPageSize(newSize);
+        setControlComponentsData((prev) => ({
+          ...prev,
+          activePage: 0,
+        }));
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [pageSize]);
 
   const handleSubmitFilter = (data: Genre) => {
     setControlComponentsData({
@@ -45,7 +61,7 @@ const MovieCatalog = () => {
       url: `/movies`,
       params: {
         page: controlComponentsData.activePage,
-        size: 8,
+        size: pageSize,
         genreId: controlComponentsData.filterGenre?.id,
       },
       withCredentials: true,
@@ -53,7 +69,7 @@ const MovieCatalog = () => {
     requestBackend(config).then((response) => {
       setPage(response.data);
     });
-  }, [controlComponentsData]);
+  }, [controlComponentsData, pageSize]);
 
   return (
     <>
