@@ -1,5 +1,6 @@
 import { AxiosRequestConfig } from "axios";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { Review } from "types/review";
 import { requestBackend } from "util/requests";
 import "./styles.css";
@@ -39,6 +40,7 @@ const ReviewForm = ({ movieId, onInsertReview }: Props) => {
         console.log("Salvo", response);
       })
       .catch((error) => {
+        toast.error("Erro ao salvar avaliação!");
         console.log("Erro", error);
       });
   };
@@ -52,9 +54,11 @@ const ReviewForm = ({ movieId, onInsertReview }: Props) => {
           })}
           type="text"
           placeholder="Deixe sua avaliação aqui"
-          className="form-control"
+          className={`form-control ${errors.text ? 'is-invalid' : ''}`}
         />
-        {errors.text?.message}
+        <div className="invalid-feedback d-block mb-3">
+          {errors.text?.message}
+        </div>
         <div className="text-center">
           <button className="btn btn-primary form-control">
             <h5>SALVAR AVALIAÇÃO</h5>

@@ -12,14 +12,11 @@ const ReviewListing = ({ reviews }: Props) => {
         <div className="container-comments" key={comment.id}>
           <div className="comments-title">
             <Star />
-            <p>{comment.user.name}</p>
+            <h5 className="comment-user-name">{comment.user.name}</h5>
           </div>
-          <textarea
-            name="comments"
-            id=""
-            readOnly
-            value={comment.text}
-          ></textarea>
+          <div className="comment-text-container">
+            <p className="comment-text">{comment.text}</p>
+          </div>
         </div>
       ))}
     </>
