@@ -45,7 +45,7 @@ const MovieCatalog = () => {
       url: `/movies`,
       params: {
         page: controlComponentsData.activePage,
-        size: 4,
+        size: 8,
         genreId: controlComponentsData.filterGenre?.id,
       },
       withCredentials: true,
