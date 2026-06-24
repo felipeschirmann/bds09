@@ -3,51 +3,89 @@
   justify-content: center;
   align-items: center;
   padding-bottom: 30px;
-  margin-top: 20px;
+  margin-top: 30px;
+  user-select: none;
 }
 
 .pagination-item {
   height: 40px;
   width: 40px;
   border-radius: 50%;
-  background-color: #6c6c6c;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid var(--glass-border);
+  color: var(--text-muted) !important;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 18px;
-  line-height: 25px;
-  letter-spacing: -0.015em;
+  font-size: 16px;
   margin-left: 10px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  text-decoration: none;
 }
 
-.active {
-  background-color: #ffc700;
+.pagination-item:hover {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff !important;
 }
 
-.pagination-active{
-  background-color: #ffc700;
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
+.pagination-active {
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 12px 0 var(--primary-glow);
 }
 
-.arrow{
-  padding: 0;
-  margin: 0;
+.pagination-active:hover {
+  background-color: var(--primary-hover) !important;
+  border-color: var(--primary-hover) !important;
+  color: #fff !important;
+}
+
+.arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrow path {
+  fill: var(--primary);
+  transition: var(--transition-smooth);
+}
+
+.arrow:hover path {
+  fill: var(--primary-hover);
 }
 
 .arrow-next {
-  color: #ffc700; 
   transform: rotate(-180deg);
   margin-left: 10px;
-  margin-bottom: 2px;
 }
 
 .arrow-inactive {
-  color: #9e9e9e;
+  opacity: 0.3;
+  pointer-events: none;
 }
 
-.arrow-active {
-  color: #ffc700; 
+.arrow-inactive path {
+  fill: var(--text-muted) !important;
+}
+
+@media (max-width: 575px) {
+  .pagination-container {
+    padding-bottom: 15px;
+    margin-top: 15px;
+  }
+  .pagination-item {
+    height: 32px;
+    width: 32px;
+    font-size: 14px;
+    margin-left: 6px;
+  }
+  .arrow-next {
+    margin-left: 6px;
+  }
 }
