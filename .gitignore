@@ -1,0 +1,6 @@
+# Gemini Configurations and Rules
+.gemini/
+readme-local.md
+
+# OS specific files
+.DS_Store
