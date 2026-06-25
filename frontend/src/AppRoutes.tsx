@@ -1,32 +1,37 @@
+import { lazy, Suspense } from "react";
 import PrivateRoute from "components/PrivateRoute";
-import Home from "pages/Home";
-import MovieCatalog from "pages/Private/MovieCatalog";
-import MovieDetails from "pages/Private/MovieDetails";
+import Loading from "components/Loading";
 import { Route, Routes } from "react-router-dom";
+
+const Home = lazy(() => import("pages/Home"));
+const MovieCatalog = lazy(() => import("pages/Private/MovieCatalog"));
+const MovieDetails = lazy(() => import("pages/Private/MovieDetails"));
 
 function AppRoutes() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route
-        path="/movies"
-        element={
-          <PrivateRoute>
-            <MovieCatalog />
-          </PrivateRoute>
-        }
-      />
-      <Route path="/movies">
+    <Suspense fallback={<Loading />}>
+      <Routes>
+        <Route path="/" element={<Home />} />
         <Route
-          path=":movieId"
+          path="/movies"
           element={
             <PrivateRoute>
-              <MovieDetails />
+              <MovieCatalog />
             </PrivateRoute>
           }
         />
-      </Route>
-    </Routes>
+        <Route path="/movies">
+          <Route
+            path=":movieId"
+            element={
+              <PrivateRoute>
+                <MovieDetails />
+              </PrivateRoute>
+            }
+          />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 }
 

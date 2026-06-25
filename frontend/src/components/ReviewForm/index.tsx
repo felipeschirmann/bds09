@@ -37,11 +37,9 @@ const ReviewForm = ({ movieId, onInsertReview }: Props) => {
       .then((response) => {
         setValue('text','');
         onInsertReview(response.data);
-        console.log("Salvo", response);
       })
       .catch((error) => {
         toast.error("Erro ao salvar avaliação!");
-        console.log("Erro", error);
       });
   };
 

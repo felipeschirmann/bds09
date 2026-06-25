@@ -3,7 +3,7 @@ import ReviewListing from "components/ReviewListing";
 import ReviewForm from "components/ReviewForm";
 import { Review } from "types/review";
 import { Movie } from "types/movie";
-import { BASE_URL, hasAnyRoles, requestBackend } from "util/requests";
+import { hasAnyRoles, requestBackend } from "util/requests";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { AxiosRequestConfig } from "axios";
@@ -24,13 +24,21 @@ const MovieDetails = () => {
   const [movie, setMovie] = useState<Movie>();
 
   useEffect(() => {
-    const config: AxiosRequestConfig = {
-      url: `${BASE_URL}/movies/${movieId}/reviews`,
+    const movieConfig: AxiosRequestConfig = {
+      url: `/movies/${movieId}`,
       withCredentials: true,
     };
-    requestBackend(config).then((response) => {
-      setReviews(response.data);
-      console.log(response.data);
+    const reviewsConfig: AxiosRequestConfig = {
+      url: `/movies/${movieId}/reviews`,
+      withCredentials: true,
+    };
+
+    Promise.all([
+      requestBackend(movieConfig),
+      requestBackend(reviewsConfig),
+    ]).then(([movieResponse, reviewsResponse]) => {
+      setMovie(movieResponse.data);
+      setReviews(reviewsResponse.data);
     });
   }, [movieId]);
 
@@ -40,17 +48,6 @@ const MovieDetails = () => {
     setReviews(clone);
     toast.success("Salvo!!!");
   };
-
-  useEffect(() => {
-    const config: AxiosRequestConfig = {
-      url: `${BASE_URL}/movies/${movieId}`,
-      withCredentials: true,
-    };
-    requestBackend(config).then((response) => {
-      setMovie(response.data);
-      console.log(response.data);
-    });
-  }, [movieId]);
 
   return (
     <>

@@ -31,14 +31,12 @@ const Login = () => {
           authenticated: true,
           tokenData: getTokenData(),
         });
-        console.log("Login...");
         navigate("/movies", { replace: true });
         toast.success("Bem Vindo!!");
         setError(false);
       })
       .catch((error) => {
         toast.error("Erro!!");
-        console.log(error);
         setError(true);
       });
   };
